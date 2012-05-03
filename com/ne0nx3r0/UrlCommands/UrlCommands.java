@@ -15,9 +15,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class UrlCommands extends JavaPlugin{
     UrlManager um;
+    Map<String,String[]> urlCommandList;
     
     @Override
     public void onEnable(){
+        urlCommandList = new HashMap<String,String[]>();
         
     //Setup urlCalls
         um = (UrlManager) getServer().getPluginManager().getPlugin("UrlManager");
@@ -74,6 +76,8 @@ public class UrlCommands extends JavaPlugin{
                 sType,
                 tempParams.toArray(new String[tempParams.size()])
             );
+            
+            urlCommandList.put(sUrlCommand, tempParams.toArray(new String[tempParams.size()]));
             
             ConfigurationSection csTempData = yml.getConfigurationSection(sUrlCommand+".data");
             

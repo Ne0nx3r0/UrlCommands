@@ -1,9 +1,8 @@
 package com.ne0nx3r0.UrlCommands;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,10 +26,29 @@ public class UrlCommandsCommandExecutor implements CommandExecutor {
         if(args.length == 0){   
             plugin.msg(player, "Usage: /uc <urlCommand> <param1> <param2> etc...");
         }else{
-            if(args[0].equalsIgnoreCase("time")){
-                plugin.um.callUrl("time");
-            }else if(args.length == 2 && args[0].equalsIgnoreCase("md5")){
-                plugin.um.callUrl("md5", args[1]);
+            if(player == null
+            || player.isOp()
+            || player.hasPermission("UrlCommands."+args[0])
+            || player.hasPermission("UrlCommands.*")){
+                if(plugin.urlCommandList.containsKey(args[0])
+                && plugin.urlCommandList.get(args[0]).length < args.length){
+                    String sUrlCommand = args[0];
+
+                    List<String> lArgs = new ArrayList<String>(Arrays.asList(args));
+                    lArgs.remove(0);
+                    args = lArgs.toArray(args);
+
+                    plugin.um.callUrl(sUrlCommand,args);
+                }else{
+                    String sArgs = "";
+                    for(String sArg : args){
+                        sArgs += " "+sArg;
+                    }
+
+                    plugin.msg(player, "Usage: /uc "+sArgs.substring(1));
+                }
+            }else{
+                plugin.msg(player,"You do not have permission to use this command.");
             }
         }
           
