@@ -1,6 +1,6 @@
 name: UrlCommands
 main: com.ne0nx3r0.UrlCommands.UrlCommands
-version: '0.3'
+version: '0.3.1'
 database: false
 description: Command based URL calls
 depend: [UrlManager]

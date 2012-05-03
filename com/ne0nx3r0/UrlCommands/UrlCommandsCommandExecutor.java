@@ -38,7 +38,7 @@ public class UrlCommandsCommandExecutor implements CommandExecutor {
                     lArgs.remove(0);
                     args = lArgs.toArray(args);
 
-                    plugin.um.callUrl(sUrlCommand,args);
+                    plugin.um.callUrl(sUrlCommand,args,player);
                 }else{
                     String sArgs = "";
                     for(String sArg : args){
