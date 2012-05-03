@@ -1,0 +1,22 @@
+#see http://www.modevs.net/get_time.sphp for source
+time:
+    url: http://www.modevs.net/get_time.php
+
+
+#see http://www.modevs.net/google_example.sphp for source
+google:
+    url: http://www.modevs.net/google.php
+#expected parameters in order (param1,param2,etc)
+    params: q
+
+
+#see http://www.modevs.net/md5.sphp for source
+md5:
+    url: http://www.modevs.net/md5.php
+#assumes type: get
+#expected params
+    params: password
+#additional data to append
+    data:
+    #Some secret value the player will never see.
+        salt: salty_123 
