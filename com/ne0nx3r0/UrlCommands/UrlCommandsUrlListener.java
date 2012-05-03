@@ -13,6 +13,9 @@ public class UrlCommandsUrlListener implements Listener{
     
     @EventHandler
     public void OnUrlResponse(UrlResponseEvent e) {
-        plugin.msg(e.getSender(), e.getPlainTextResult());
+        if(plugin.urlCommandList.containsKey(e.getUrlCallName())){
+            plugin.msg(e.getSender(), e.getPlainTextResult());
+        }
+        
     }
 }

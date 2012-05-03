@@ -28,8 +28,8 @@ public class UrlCommandsCommandExecutor implements CommandExecutor {
         }else{
             if(player == null
             || player.isOp()
-            || player.hasPermission("UrlCommands."+args[0])
-            || player.hasPermission("UrlCommands.*")){
+            || player.hasPermission("UrlCommands.commands."+args[0])
+            || player.hasPermission("UrlCommands.commands.*")){
                 if(plugin.urlCommandList.containsKey(args[0])
                 && plugin.urlCommandList.get(args[0]).length < args.length){
                     String sUrlCommand = args[0];
