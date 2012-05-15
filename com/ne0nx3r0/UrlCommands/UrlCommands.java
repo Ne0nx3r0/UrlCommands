@@ -15,11 +15,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class UrlCommands extends JavaPlugin{
     UrlManager um;
-    Map<String,String[]> urlCommandList;
+    Map<String,UrlCommand> urlCommandsList;
     
     @Override
     public void onEnable(){
-        urlCommandList = new HashMap<String,String[]>();
+        urlCommandsList = new HashMap<String,UrlCommand>();
         
     //Setup urlCalls
         um = (UrlManager) getServer().getPluginManager().getPlugin("UrlManager");
@@ -69,15 +69,24 @@ public class UrlCommands extends JavaPlugin{
             if(sParams != null){
                 tempParams.addAll(Arrays.asList(sParams.split(",")));
             }
+            
+            String sPlayerCommand = yml.getString(sUrlCommand+".resultPlayerCommand");
 
+            String sConsoleCommand = yml.getString(sUrlCommand+".resultConsoleCommand");
+
+            urlCommandsList.put(sUrlCommand, new UrlCommand(
+                yml.getBoolean(sUrlCommand+".showPlayerResult"),
+                tempParams.toArray(new String[tempParams.size()]),
+                sPlayerCommand,
+                sConsoleCommand
+            ));
+            
             um.addUrlCall(
                 sUrlCommand,
                 sUrlAddress,
                 sType,
                 tempParams.toArray(new String[tempParams.size()])
             );
-            
-            urlCommandList.put(sUrlCommand, tempParams.toArray(new String[tempParams.size()]));
             
             ConfigurationSection csTempData = yml.getConfigurationSection(sUrlCommand+".data");
             
@@ -117,7 +126,7 @@ public class UrlCommands extends JavaPlugin{
     
     protected void msg(Player p,String message){
         if(p != null){
-            p.chat("[UC] "+message);
+            p.sendMessage("[UC] "+message);
         }else{
             log(message);
         }

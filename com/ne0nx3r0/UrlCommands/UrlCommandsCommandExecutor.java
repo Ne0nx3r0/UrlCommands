@@ -30,13 +30,13 @@ public class UrlCommandsCommandExecutor implements CommandExecutor {
             || player.isOp()
             || player.hasPermission("UrlCommands.commands."+args[0])
             || player.hasPermission("UrlCommands.commands.*")){
-                if(plugin.urlCommandList.containsKey(args[0])
-                && plugin.urlCommandList.get(args[0]).length < args.length){
+                if(plugin.urlCommandsList.containsKey(args[0])
+                && plugin.urlCommandsList.get(args[0]).getParamsLength() < args.length){
                     String sUrlCommand = args[0];
 
                     List<String> lArgs = new ArrayList<String>(Arrays.asList(args));
                     lArgs.remove(0);
-                    args = lArgs.toArray(args);
+                    args = lArgs.toArray(new String[args.length-1]);
 
                     plugin.um.callUrl(sUrlCommand,args,player);
                 }else{

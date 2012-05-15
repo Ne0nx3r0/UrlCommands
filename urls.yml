@@ -1,6 +1,7 @@
 #see http://www.modevs.net/get_time.sphp for source
 time:
     url: http://www.modevs.net/get_time.php
+    showPlayerResult: true
 
 
 #see http://www.modevs.net/google_example.sphp for source
@@ -8,6 +9,8 @@ google:
     url: http://www.modevs.net/google.php
 #expected parameters in order (param1,param2,etc)
     params: q
+# Default is to show player the text result
+#    showPlayerResult: true
 
 
 #see http://www.modevs.net/md5.sphp for source
@@ -20,3 +23,27 @@ md5:
     data:
     #Some secret value the player will never see.
         salt: salty_123 
+
+#    
+#example of running a command based on the result
+#
+
+#see http://www.modevs.net/command.sphp for source
+#forces the player to run whatever the runThis variable is (JSON)
+command:
+  url: http://www.modevs.net/command.php
+  params: command
+  data:
+    key: secret_key
+  resultPlayerCommand: "/me %runThis%"
+  showPlayerResult: false
+    
+#see http://www.modevs.net/command.sphp for source
+#forces the player to run whatever the runThis variable is (JSON)
+consolecommand: 
+  url: http://www.modevs.net/command.php
+  params: command
+  data:
+    key: secret_key
+  resultConsoleCommand: "say %runThis%"
+  showPlayerResult: false
